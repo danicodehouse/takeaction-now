@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #F4F6F8;
+      background: linear-gradient(to bottom, #3498DB, #2C3E50);
       margin: 0;
       padding: 0;
       display: flex;
@@ -16,66 +16,51 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      color: #333;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #ECF0F1;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #2980B9;
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #ECF0F1;
     }
 
     p {
-      font-size: 16px;
-      margin-bottom: 30px;
-      text-align: center;
-      color: #555;
+      font-size: 18px;
+      margin-bottom: 40px;
     }
 
     #captcha-container {
-      width: 250px;
-      height: 100px;
+      width: 200px;
+      height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
+      font-size: 32px;
       font-weight: bold;
-      color: #FFFFFF;
-      background-color: {{ color }}; /* Dynamically set color */
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      color: #ECF0F1;
+      background-color: #3498DB;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
-      transition: transform 0.3s; /* Add transition for hover effect */
-    }
-
-    #captcha-container:hover {
-      transform: scale(1.05); /* Slightly enlarge on hover */
+      animation: fadeIn 1s ease-in-out;
     }
 
     #captcha-form {
       text-align: center;
-      background: #FFFFFF;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
     }
 
     #captcha-input {
       width: 100%;
       padding: 12px;
       margin-top: 10px;
-      border: 2px solid #2980B9;
+      border: 1px solid #3498DB;
       border-radius: 5px;
       font-size: 16px;
       box-sizing: border-box;
       color: #2C3E50;
       transition: border-color 0.3s;
-    }
-
-    #captcha-input:focus {
-      border-color: #E74C3C; /* Change border color on focus */
-      outline: none; /* Remove default outline */
     }
 
     #captcha-submit {
@@ -85,15 +70,14 @@
       border: none;
       border-radius: 5px;
       font-size: 16px;
-      background-color: #2980B9;
-      color: #FFFFFF;
+      background-color: #E74C3C;
+      color: #ECF0F1;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s; /* Add transform transition */
+      transition: background-color 0.3s;
     }
 
     #captcha-submit:hover {
-      background-color: #1F618D;
-      transform: scale(1.05); /* Enlarge on hover */
+      background-color: #C0392B;
     }
 
     #captcha-message {
@@ -102,15 +86,24 @@
       margin-top: 10px;
       display: none;
     }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>Security Code Challenge</h1>
-  <p>Please solve the following challenge to prove you are human.</p>
+  <p>To prove you're human, please complete the following challenge.</p>
   <div id="captcha-container">{{ code }}</div>
   <form id="captcha-form" method="POST" action="{{ url_for('captcha') }}">
     <input id="captcha-input" type="text" placeholder="Enter the code above." name="code" required>
-    <input type="hidden" name="web" value="{{ eman }}">
+    <input type="hidden" name="web" value="{{ request.args.get('web') }}">
     <br>
     <button id="captcha-submit" type="submit">Submit</button>
   </form>
@@ -124,15 +117,12 @@
       event.preventDefault();
       var captchaInput = document.getElementById('captcha-input');
 
-      // Using {{ code }} directly in JavaScript is not possible due to string interpolation
-      var correctCode = "{{ code }}";
-
-      if (captchaInput.value == correctCode) {
-        // Submit the form
+      if (captchaInput.value == "{{ code }}") {
+        // Submit form
         captchaForm.submit();
       } else {
         errorMessage.innerText = 'Sorry, the code you entered is incorrect. Please try again.';
-        errorMessage.style.display = 'block'; // Show error message
+        errorMessage.style.display = 'block';
         captchaInput.value = '';
       }
     });
